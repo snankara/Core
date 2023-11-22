@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -81,6 +82,18 @@ public class EfRepositoryBase<TEntity,TEntityId,TContext> : IAsyncRepository<TEn
         if (withDeleted)
             queryable = queryable.IgnoreQueryFilters();
         return await queryable.FirstOrDefaultAsync(predicate, cancellationToken);
+    }
+
+    public async Task<int> GetCount(Expression<Func<TEntity, bool>> predicate, bool withDeleted = false, CancellationToken cancellationToken = default)
+    {
+        IQueryable<TEntity> queryable = Query();
+
+        if (withDeleted)
+            queryable = queryable.IgnoreQueryFilters();
+        if (predicate != null)
+            queryable = queryable.Where(predicate);
+
+        return await queryable.CountAsync(cancellationToken);
     }
 
     public async Task<Paginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, int index = 0, int size = 10, bool withDeleted = false, bool enableTracking = true, CancellationToken cancellationToken = default)
@@ -233,5 +246,6 @@ public class EfRepositoryBase<TEntity,TEntityId,TContext> : IAsyncRepository<TEn
         foreach (TEntity entity in entities)
             await SetEntityAsDeletedAsync(entity, permanent);
     }
+
 
 }

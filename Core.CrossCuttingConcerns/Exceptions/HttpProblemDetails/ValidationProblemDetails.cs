@@ -20,5 +20,6 @@ public class ValidationProblemDetails : ProblemDetails
         Errors = errors;
         Status = StatusCodes.Status400BadRequest;
         Type = "https://example.com/probs/validation";
+        Instance = "ValidationError";
     }
 }

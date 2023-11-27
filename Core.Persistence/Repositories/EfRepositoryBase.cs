@@ -84,7 +84,7 @@ public class EfRepositoryBase<TEntity,TEntityId,TContext> : IAsyncRepository<TEn
         return await queryable.FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
-    public async Task<int> GetCount(Expression<Func<TEntity, bool>> predicate, bool withDeleted = false, CancellationToken cancellationToken = default)
+    public async Task<int> GetCountAsync(Expression<Func<TEntity, bool>>? predicate, bool withDeleted = false, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> queryable = Query();
 

@@ -50,7 +50,7 @@ public interface IAsyncRepository<TEntity, TEntityId> : IQuery<TEntity>
         CancellationToken cancellationToken = default
     );
 
-    Task<int> GetCount(
+    Task<int> GetCountAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         bool withDeleted = false,
         CancellationToken cancellationToken = default

@@ -22,4 +22,10 @@ public class Entity<TId> : IEntityTimestamps
     {
         Id = id;
     }
+
+    public Entity(TId id, DateTime createdDate)
+    {
+        Id = id;
+        CreatedDate = createdDate;
+    }
 }

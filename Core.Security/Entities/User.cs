@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ public class User : Entity<Guid>
     public byte[] PasswordSalt { get; set; }
     public byte[] PasswordHash { get; set; }
     public bool Status { get; set; }
+    public AuthenticatorType AuthenticatorType { get; set; }
 
     public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = null!;
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = null!;
@@ -35,7 +37,8 @@ public class User : Entity<Guid>
         Status = status;
     }
 
-    public User(Guid id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status): base(id)
+    public User(Guid id, DateTime createdDate, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status)
+        :base(id: id, createdDate: createdDate)
     {
         FirstName = firstName;
         LastName = lastName;

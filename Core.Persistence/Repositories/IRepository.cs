@@ -40,6 +40,12 @@ public interface IRepository<TEntity, TEntityId> : IQuery<TEntity>
         bool enableTracking = true
     );
 
+    int GetCount(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool withDeleted = false,
+        CancellationToken cancellationToken = default
+    );
+
     bool Any(Expression<Func<TEntity, bool>>? predicate = null, bool withDeleted = false, bool enableTracking = true);
     TEntity Add(TEntity entity);
     ICollection<TEntity> AddRange(ICollection<TEntity> entities);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Security.Entities;
 
-public class User : Entity<Guid>
+public class User : Entity<int>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -37,7 +37,7 @@ public class User : Entity<Guid>
         Status = status;
     }
 
-    public User(Guid id, DateTime createdDate, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status)
+    public User(int id, DateTime createdDate, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status)
         :base(id: id, createdDate: createdDate)
     {
         FirstName = firstName;

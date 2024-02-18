@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Security.Entities;
 
-public class OperationClaim: Entity<Guid>
+public class OperationClaim: Entity<int>
 {
     public string Name { get; set; }
 
@@ -23,7 +23,7 @@ public class OperationClaim: Entity<Guid>
         Name = name;
     }
 
-    public OperationClaim(Guid id, string name):base(id)
+    public OperationClaim(int id, string name, DateTime createdDate):base(id, createdDate)
     {
         Name = name;
     }

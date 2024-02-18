@@ -30,7 +30,7 @@ public class JwtHelper : ITokenHelper
 
     public RefreshToken CreateRefreshToken(User user, string ipAddress)
     {
-        RefreshToken refreshToken = new(user.Id, RandomRefreshToken(), DateTime.UtcNow.AddDays(7), ipAddress);
+        RefreshToken refreshToken = new(user.Id, RandomRefreshToken(), DateTime.Now.AddDays(7), ipAddress);
 
         return refreshToken;
     }

@@ -29,7 +29,7 @@ public class OtpNetOtpAuthenticatorHelper: IOtpAuthenticatorHelper
     {
         Totp totp = new(secretKey);
 
-        string totpCode = totp.ComputeTotp(DateTime.UtcNow);
+        string totpCode = totp.ComputeTotp(DateTime.Now);
 
         return Task.FromResult(totpCode == code);
     }

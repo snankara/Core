@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Security.Entities;
 
-public class RefreshToken: Entity<Guid>
+public class RefreshToken: Entity<int>
 {
-    public Guid UserId { get; set; }
+    public int UserId { get; set; }
     public string Token { get; set; }
     public DateTime Expires { get; set; }
     public string CreatedByIp { get; set; }
@@ -25,7 +25,7 @@ public class RefreshToken: Entity<Guid>
         
     }
 
-    public RefreshToken(Guid userId, string token, DateTime expires, string createdByIp)
+    public RefreshToken(int userId, string token, DateTime expires, string createdByIp)
     {
         UserId = userId;
         Token = token;
@@ -33,7 +33,7 @@ public class RefreshToken: Entity<Guid>
         CreatedByIp = createdByIp;
     }
 
-    public RefreshToken(Guid id, Guid userId, string token, DateTime expires, string createdByIp): base(id)
+    public RefreshToken(int id, int userId, string token, DateTime expires, string createdByIp): base(id)
     {
         UserId = userId;
         Token = token;
